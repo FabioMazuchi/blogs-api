@@ -1,14 +1,37 @@
 const blogPostService = require('../services/blogPostService');
+const date = require('../utils/date');
+
+const create = async (req, res, next) => {
+  try {
+    const { title, content, categoryIds } = req.body;
+    const published = date();
+    const updated = date();
+
+    await blogPostService.verifyCategoryExist(categoryIds);
+  
+    const newPost = await blogPostService.create(title, content, published, updated);
+
+    await blogPostService.addCategoriesToPost(newPost.id, categoryIds);
+    
+    res.status(201).json(newPost);
+  } catch (e) {
+    console.log('Blog create: ', e.message);
+    next(e);
+  }
+};
 
 const getAll = async (req, res) => {
   const blogpPsts = await blogPostService.getAll();
+  
   res.status(200).json(blogpPsts);
 };
 
 const getById = async (req, res, next) => {
   try {
     const { id } = req.params;
+    
     const blogPost = await blogPostService.getById(id);
+    
     res.status(200).json(blogPost);
   } catch (e) {
     console.log('Get by id blogPost: ', e.message);
@@ -17,6 +40,7 @@ const getById = async (req, res, next) => {
 };
 
 module.exports = {
+  create,
   getAll,
   getById,
 };

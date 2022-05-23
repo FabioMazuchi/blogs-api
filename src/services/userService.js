@@ -28,7 +28,6 @@ const getById = async (id) => {
   const erro = { status: 404, message: 'User does not exist' };
 
   if (user === null) throw erro;
-  console.log(user);
   
   return user;
 };
