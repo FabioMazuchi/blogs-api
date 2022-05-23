@@ -22,6 +22,25 @@ const create = async (title, content, published, updated) => {
   return getPost;
 };
 
+const verifyUser = async (id, email) => {
+  const blogPost = await getById(id);
+ 
+  const erro = { status: 401, message: 'Unauthorized user' };
+
+  if (blogPost.user.email !== email) throw erro;
+};
+
+const update = async (id, title, content, updated) => {
+  await BlogPost.update(
+    { title, content, updated },
+    { where: { id } },
+  );
+
+  const newPostUpdated = await getById(id); 
+  
+  return newPostUpdated;
+};
+
 const verifyCategoryExist = async (categoryIds) => {
   const categories = await Category.findAll({ where: { id: categoryIds } });
   const erro = { status: 400, message: '"categoryIds" not found' };
@@ -49,8 +68,10 @@ const getAll = async () => {
 
 module.exports = {
   create,
+  update,
   getAll,
   getById,
   addCategoriesToPost,
   verifyCategoryExist,
+  verifyUser,
 };

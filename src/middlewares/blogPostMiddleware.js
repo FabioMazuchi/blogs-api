@@ -12,6 +12,11 @@ const verifyData = (title, content, categoryIds) => {
   if (categoryIdsExist(categoryIds)) throw data.dataValid;
 };
 
+const verifyDataUpdated = (title, content) => {
+  if (titleExist(title)) throw data.dataValid;
+  if (contentExist(content)) throw data.dataValid;
+};
+
 const validate = (req, res, next) => {
   try {
     const { title, content, categoryIds } = req.body;
@@ -24,6 +29,19 @@ const validate = (req, res, next) => {
   }
 };
 
+const validateUpdated = (req, res, next) => {
+  try {
+    const { title, content } = req.body;
+    
+    verifyDataUpdated(title, content);
+    
+    next();
+  } catch (e) {
+    next(e);
+  }
+};
+
 module.exports = {
     validate,
+    validateUpdated,
 };
