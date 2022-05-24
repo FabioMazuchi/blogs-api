@@ -42,8 +42,22 @@ const getById = async (req, res, next) => {
   }
 };
 
+const excluir = async (req, res, next) => {
+  try {
+    const { id } = req.user.data;
+
+    await userService.excluir(id);
+
+    res.status(204).end();
+  } catch (e) {
+    console.log('Excluir user: ', e.message);
+    next(e);
+  }
+};
+
 module.exports = {
   create,
   getAll,
   getById,
+  excluir,
 };
