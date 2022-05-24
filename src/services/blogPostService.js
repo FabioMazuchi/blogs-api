@@ -1,3 +1,6 @@
+const sequelize = require('sequelize');
+
+const { Op } = sequelize;
 const { BlogPost, User, Category } = require('../database/models');
 
 const getById = async (id) => {
@@ -11,6 +14,24 @@ const getById = async (id) => {
   const erro = { status: 404, message: 'Post does not exist' };
 
   if (blogPost === null) throw erro;
+
+  return blogPost;
+};
+
+const search = async (query) => {
+  // https://www.codegrepper.com/code-examples/javascript/sequelize+Op.and+operator
+  const blogPost = await BlogPost.findAll({
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Category, as: 'categories' },
+    ],
+    where: {
+      [Op.or]: [
+        { title: { [Op.like]: query } },
+        { content: { [Op.like]: query } },
+      ],
+    },
+  });
 
   return blogPost;
 };
@@ -93,4 +114,5 @@ module.exports = {
   addCategoriesToPost,
   verifyCategoryExist,
   verifyUser,
+  search,
 };

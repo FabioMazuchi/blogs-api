@@ -29,6 +29,18 @@ const getAll = async (req, res) => {
   res.status(200).json(blogpPsts);
 };
 
+const search = async (req, res) => {
+  try {
+    const query = `%${req.query.q}%`;
+    console.log(query);
+    const blogpPsts = await blogPostService.search(query);
+    
+    res.status(200).json(blogpPsts);
+  } catch (e) {
+    console.log('blogPost search: ', e.message);
+  }
+};
+
 const getById = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -83,4 +95,5 @@ module.exports = {
   getById,
   update,
   excluir,
+  search,
 };
