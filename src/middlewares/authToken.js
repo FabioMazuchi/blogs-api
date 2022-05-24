@@ -5,7 +5,9 @@ const { JWT_SECRET } = process.env;
 const erro = { status: 401, message: 'Expired or invalid token' };
 
 const validToken = (err) => {
-  if (err.message === 'invalid signature' || err.message === 'jwt malformed') return true;
+  if (err.message === 'invalid signature' 
+  || err.message === 'jwt malformed'
+  || err.message === 'jwt expired') return true;
   return false;
 };
 

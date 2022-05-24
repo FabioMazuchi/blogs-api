@@ -36,10 +36,8 @@ const search = async (query) => {
   return blogPost;
 };
 
-const create = async (obj) => {
-  const { title, content, userId, published, updated } = obj;
-  
-  const newPost = await BlogPost.create({ title, content, userId, published, updated });
+const create = async (title, content, userId, published) => {
+  const newPost = await BlogPost.create({ title, content, userId, published });
   const getPost = await BlogPost.findByPk(newPost.null);
   
   return getPost;
