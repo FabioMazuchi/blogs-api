@@ -6,10 +6,13 @@ const create = async (req, res, next) => {
     const { title, content, categoryIds } = req.body;
     const published = date();
     const updated = date();
+    const { id: userId } = req.user.data;
 
     await blogPostService.verifyCategoryExist(categoryIds);
+
+    const obj = { title, content, published, updated, userId };
   
-    const newPost = await blogPostService.create(title, content, published, updated);
+    const newPost = await blogPostService.create(obj);
 
     await blogPostService.addCategoriesToPost(newPost.id, categoryIds);
     
@@ -58,9 +61,26 @@ const update = async (req, res, next) => {
   }
 };
 
+const excluir = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+  
+    const { data: { id: idToken } } = req.user;
+    // console.log(req.user);
+    
+    await blogPostService.excluir(id, idToken);
+    
+    res.status(204).end();
+  } catch (e) {
+    console.log('Excluir blogPost: ', e.message);
+    next(e);
+  }
+};
+
 module.exports = {
   create,
   getAll,
   getById,
   update,
+  excluir,
 };

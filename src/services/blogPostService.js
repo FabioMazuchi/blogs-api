@@ -15,8 +15,10 @@ const getById = async (id) => {
   return blogPost;
 };
 
-const create = async (title, content, published, updated) => {
-  const newPost = await BlogPost.create({ title, content, published, updated });
+const create = async (obj) => {
+  const { title, content, userId, published, updated } = obj;
+  
+  const newPost = await BlogPost.create({ title, content, userId, published, updated });
   const getPost = await BlogPost.findByPk(newPost.null);
   
   return getPost;
@@ -39,6 +41,22 @@ const update = async (id, title, content, updated) => {
   const newPostUpdated = await getById(id); 
   
   return newPostUpdated;
+};
+
+const excluir = async (id, idToken) => {
+  const blogPost = await BlogPost.findByPk(id, {
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+    ],
+  });
+
+  const erroPostExist = { status: 404, message: 'Post does not exist' };
+  const erroUserAuth = { status: 401, message: 'Unauthorized user' };
+  
+  if (blogPost === null) throw erroPostExist;
+  if (blogPost.user.id !== idToken) throw erroUserAuth;
+
+  await BlogPost.destroy({ where: { id } });
 };
 
 const verifyCategoryExist = async (categoryIds) => {
@@ -69,6 +87,7 @@ const getAll = async () => {
 module.exports = {
   create,
   update,
+  excluir,
   getAll,
   getById,
   addCategoriesToPost,
