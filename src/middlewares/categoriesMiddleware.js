@@ -1,23 +1,17 @@
-const data = {
-  nameValid: { status: 400, message: '"name" is required' },
-};
+const Joi = require('joi');
 
-const nameExist = (name) => !name;
-
-const verifyData = (name) => {
-  if (nameExist(name)) throw data.nameValid;
-};
+const validateBody = (body) =>
+  Joi.object({
+    name: Joi.string().required().messages({
+      'string.required': '"name" is required',
+    }),
+  }).validate(body);
 
 const validate = (req, res, next) => {
-  try {
-    const { name } = req.body;
+  const { error } = validateBody(req.body);
     
-    verifyData(name);
-    
-    next();
-  } catch (e) {
-    next(e);
-  }
+  if (error) return next(error);
+  next();
 };
 
 module.exports = {
