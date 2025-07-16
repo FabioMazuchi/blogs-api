@@ -1,0 +1,12 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "1.0.0",
+		"title": "API de Blog",
+		"description": "Aplicação para manipulação de um blog.",
+		"contact": {
+			"email": "mazuchi.augusto@hotmail.com"
+		}
+	},
+	"host": "blogs-api-production-9bc1.up.railway.app"
+}
