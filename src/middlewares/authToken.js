@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const { JWT_SECRET } = process.env;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const erro = { status: 401, message: 'Expired or invalid token' };
 
@@ -11,10 +11,15 @@ const validToken = (err) => {
   return false;
 };
 
+const extractToken = (value) => {
+  return value.split(' ')[1];
+}
+
 const authToken = async (req, res, next) => {
   try {
-    const token = req.headers.authorization;
-    
+    const value = req.headers.authorization;
+    const token = extractToken(value);
+  
     if (!token) return res.status(401).json({ message: 'Token not found' });
     
     const decoded = jwt.verify(token, JWT_SECRET);

@@ -8,5 +8,33 @@
 			"email": "mazuchi.augusto@hotmail.com"
 		}
 	},
-	"host": "blogs-api-production-9bc1.up.railway.app"
+	"host": "blogs-api-production-9bc1.up.railway.app",
+	  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/user": {
+      "get": {
+        "summary": "GET /user",
+        "operationId": "ListFeatures",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/featureListFeaturesResponse"
+            }
+          }
+        },
+        "tags": [
+          "User"
+        ]
+      }
+    }
+}
 }

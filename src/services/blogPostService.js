@@ -79,7 +79,11 @@ const excluir = async (id, idToken) => {
 };
 
 const verifyCategoryExist = async (categoryIds) => {
+  console.log(categoryIds);
+  
   const categories = await Category.findAll({ where: { id: categoryIds } });
+  console.log(categories);
+  
   const erro = { status: 400, message: '"categoryIds" not found' };
 
   if (categories.length !== categoryIds.length) throw erro;
