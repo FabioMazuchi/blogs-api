@@ -20,21 +20,48 @@
   ],
   "paths": {
     "/user": {
-      "get": {
-        "summary": "GET /user",
+      "post": {
+        "summary": "Cadastrar usuário",
+        "description": "Rota responável por cadastrar um novo usuário",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        ], 
         "operationId": "ListFeatures",
         "responses": {
           "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/featureListFeaturesResponse"
-            }
+            "description": "Token"
           }
-        },
-        "tags": [
-          "User"
-        ]
+        }
       }
     }
-}
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
 }
