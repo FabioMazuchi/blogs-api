@@ -10,7 +10,7 @@
   },
   "host": "blogs-api-production-9bc1.up.railway.app",
   "schemes": [
-    "http"
+    "https"
   ],
   "consumes": [
     "application/json"
