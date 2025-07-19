@@ -135,7 +135,7 @@
         ]
       }
     },
-     "/user/me": {
+    "/user/me": {
       "delete": {
         "summary": "Excluir usuário",
         "description": "Excluir informações sobre usuário cadastrado",
@@ -147,6 +147,164 @@
             "description": "Resposta da exclusão do usuário",
             "schema": {
               "type": "object"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "aaa.aaa.aaa"
+          }
+        ]
+      }
+    },
+    "/categories": {
+      "post": {
+        "summary": "Cadastrar uma categoria",
+        "description": "Rota responável por cadastrar uma nova categoria",
+        "tags": [
+          "Categories"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Categorie"
+            }
+          }
+        ],
+        "operationId": "ListFeatures",
+        "responses": {
+          "201": {
+            "description": "Resposta do cadastro de uma nova categoria",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Buscar categpries",
+        "description": "Buscar informações sobre categorias cadastrados",
+        "tags": [
+          "Categories"
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta da busca por categorias",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "categories": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "aaa.aaa.aaa"
+          }
+        ]
+      }
+    },
+    "/post": {
+      "post": {
+        "summary": "Cadastrar um post",
+        "description": "Rota responável por cadastrar uma novo post",
+        "tags": [
+          "Posts"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Post"
+            }
+          }
+        ],
+        "operationId": "ListFeatures",
+        "responses": {
+          "201": {
+            "description": "Resposta do cadastro de uma nova categoria",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                },
+                "userId": {
+                  "type": "integer"
+                },
+                "published": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updated": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Buscar posts",
+        "description": "Buscar informações sobre posts cadastrados",
+        "tags": [
+          "Posts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta da busca por posts",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "posts": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PostsResponse"
+                  }
+                }
+              }
             }
           }
         },
@@ -175,6 +333,73 @@
           },
           "image": {
             "type": "string"
+          }
+        }
+      },
+      "Categorie": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Post": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "categoryIds": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "PostsResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "displayName": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "image": {
+                "type": "string"
+              }
+            }
           }
         }
       }
