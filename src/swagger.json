@@ -3,7 +3,7 @@
   "info": {
     "version": "1.0.0",
     "title": "API de Blog",
-    "description": "Aplicação para manipulação de um blog.",
+    "description": "Aplicação para manipulação de blog",
     "contact": {
       "email": "mazuchi.augusto@hotmail.com"
     }
@@ -19,6 +19,39 @@
     "application/json"
   ],
   "paths": {
+    "/login": {
+      "post": {
+        "summary": "Realizar o login",
+        "description": "Rota responável pelo login",
+        "tags": [
+          "Login"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ListFeatures",
+        "responses": {
+          "200": {
+            "description": "Token"
+          }
+        }
+      }
+    },
     "/user": {
       "post": {
         "summary": "Cadastrar usuário",
@@ -36,7 +69,6 @@
             }
           }
         ],
-        "operationId": "ListFeatures",
         "responses": {
           "200": {
             "description": "Token"
@@ -318,6 +350,91 @@
           }
         ]
       }
+    },
+    "/post/id": {
+      "get": {
+        "summary": "Buscar post",
+        "description": "Buscar informações sobre post cadastrado",
+        "tags": [
+          "Posts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta da busca por post",
+            "schema": {
+              "type": "object",
+              "$ref": "#/components/schemas/PostsResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "aaa.aaa.aaa"
+          }
+        ]
+      },
+      "put": {
+        "summary": "Atualizar um post",
+        "description": "Rota responável por atualizar um post",
+        "tags": [
+          "Posts"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta do post atualizado",
+            "schema": {
+              "type": "object",
+              "$ref": "#/components/schemas/PostsResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Excluir post",
+        "description": "Excluir informações sobre o post cadastrado",
+        "tags": [
+          "Posts"
+        ],
+        "responses": {
+          "204": {
+            "description": "Resposta da exclusão do post",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "aaa.aaa.aaa"
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -398,6 +515,31 @@
               },
               "image": {
                 "type": "string"
+              }
+            }
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "PostCategory": {
+                  "type": "object",
+                  "properties": {
+                    "postId": {
+                      "type": "integer"
+                    },
+                    "categoryId": {
+                      "type": "integer"
+                    }
+                  }
+                }
               }
             }
           }
