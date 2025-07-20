@@ -163,6 +163,18 @@
       "delete": {
         "summary": "Excluir usuário",
         "description": "Excluir informações sobre usuário cadastrado",
+           "parameters":[
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID do usuário",
+            "schema":{
+              "type":"integer"
+            }
+            
+          }
+        ],
         "tags": [
           "Users"
         ],
@@ -320,18 +332,6 @@
       "get": {
         "summary": "Buscar post",
         "description": "Buscar informações sobre post cadastrado",
-          "parameters":[
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "ID do post",
-            "schema":{
-              "type":"integer"
-            }
-            
-          }
-        ],
         "tags": [
           "Posts"
         ],
@@ -348,26 +348,20 @@
       "put": {
         "summary": "Atualizar um post",
         "description": "Rota responável por atualizar um post",
+           "parameters":[
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID do post",
+            "schema":{
+              "type":"integer"
+            }
+            
+          }
+        ],
         "tags": [
           "Posts"
-        ],
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string"
-                },
-                "content": {
-                  "type": "string"
-                }
-              }
-            }
-          }
         ],
         "responses": {
           "200": {
@@ -393,8 +387,20 @@
             }
           }
         }
-      }
-    }
+      },
+      "parameters":[
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID do post",
+            "schema":{
+              "type":"integer"
+            }
+            
+          }
+        ]
+    } 
   },
   "components": {
     "schemas": {

@@ -53,9 +53,9 @@ const update = async (req, res) => {
 const excluir = async (req, res) => {
   const { id } = req.params;
 
-  const { data: { id: idToken } } = req.user;
+  // const { data: { id: idToken } } = req.user;
   
-  await blogPostService.excluir(id, idToken);
+  await blogPostService.excluir(id);
   
   res.status(204).end();
 };
