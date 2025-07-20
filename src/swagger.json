@@ -110,16 +110,7 @@
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "name": "token",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "aaa.aaa.aaa"
-          }
-        ]
+        }
       }
     },
     "/user/id": {
@@ -155,16 +146,7 @@
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "name": "token",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "aaa.aaa.aaa"
-          }
-        ]
+        }
       },
       "delete": {
         "summary": "Excluir usuário",
@@ -179,16 +161,7 @@
               "type": "object"
             }
           }
-        },
-        "parameters": [
-          {
-            "name": "token",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "aaa.aaa.aaa"
-          }
-        ]
+        }
       }
     },
     "/categories": {
@@ -255,16 +228,7 @@
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "name": "token",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "aaa.aaa.aaa"
-          }
-        ]
+        }
       }
     },
     "/post": {
@@ -337,16 +301,7 @@
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "name": "token",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "aaa.aaa.aaa"
-          }
-        ]
+        }
       }
     },
     "/post/id": {
@@ -364,16 +319,7 @@
               "$ref": "#/components/schemas/PostsResponse"
             }
           }
-        },
-        "parameters": [
-          {
-            "name": "token",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "aaa.aaa.aaa"
-          }
-        ]
+        }
       },
       "put": {
         "summary": "Atualizar um post",
@@ -422,16 +368,7 @@
               "type": "object"
             }
           }
-        },
-        "parameters": [
-          {
-            "name": "token",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "aaa.aaa.aaa"
-          }
-        ]
+        }
       }
     }
   },
