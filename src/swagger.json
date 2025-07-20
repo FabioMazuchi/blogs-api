@@ -165,9 +165,7 @@
             "format": "aaa.aaa.aaa"
           }
         ]
-      }
-    },
-    "/user/me": {
+      },
       "delete": {
         "summary": "Excluir usuário",
         "description": "Excluir informações sobre usuário cadastrado",

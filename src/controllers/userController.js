@@ -28,7 +28,7 @@ const getById = async (req, res) => {
 };
 
 const excluir = async (req, res) => {
-  const { id } = req.user.data;
+  const { id } = req.params;
 
   await userService.excluir(id);
 

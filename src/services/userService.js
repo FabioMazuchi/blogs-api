@@ -33,6 +33,7 @@ const getById = async (id) => {
 };
 
 const excluir = async (id) => {
+  await getById(id);
   await User.destroy({ where: { id } });
 };
 
