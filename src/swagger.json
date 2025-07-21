@@ -18,6 +18,13 @@
   "produces": [
     "application/json"
   ],
+  "securityDefinitions": {
+    "authentication": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
   "paths": {
     "/login": {
       "post": {
@@ -56,6 +63,9 @@
       "post": {
         "summary": "Cadastrar usuário",
         "description": "Rota responável por cadastrar um novo usuário",
+        "security": {
+         "authentication":[]
+        },
         "tags": [
           "Users"
         ],
