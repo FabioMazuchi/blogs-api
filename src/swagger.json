@@ -64,7 +64,7 @@
     "/user": {
       "post": {
         "summary": "Cadastrar usuário",
-        "description": "Rota responável por cadastrar um novo usuário",
+        "description": "Rota responável por cadastrar um novo usuário. Obs.: Para ter acesso a todas as rotas, utilize no campo 'passowrd' a senha password",
         "tags": [
           "Users"
         ],
@@ -79,7 +79,7 @@
                   "value": {
                     "displayName": "João das Maravilhas",
                     "email": "joao@email.com",
-                    "password": "1234567",
+                    "password": "password",
                     "image": "image.png"
                   }
                 }

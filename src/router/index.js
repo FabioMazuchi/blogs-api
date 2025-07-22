@@ -9,7 +9,7 @@ const blogPostRouter = require('./blogPost');
 const router = express.Router();
 
 router.use('/api-docs', swaggerUi.serve);
-router.get('/api-docs', swaggerUi.setup(swaggerDoc, { explorer: true }));
+router.get('/api-docs', swaggerUi.setup(swaggerDoc, { explore: false }));
 
 router.use('/login', loginRouter);
 router.use('/user', userRouter);
