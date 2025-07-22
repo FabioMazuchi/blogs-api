@@ -62,7 +62,7 @@ const update = async (id, title, content, updated) => {
   return newPostUpdated;
 };
 
-const excluir = async (id) => {
+const excluir = async (id, idToken) => {
   const blogPost = await BlogPost.findByPk(id, {
     include: [
       { model: User, as: 'user', attributes: { exclude: ['password'] } },
@@ -70,10 +70,10 @@ const excluir = async (id) => {
   });
 
   const erroPostExist = { status: 404, message: 'Post does not exist' };
-  // const erroUserAuth = { status: 401, message: 'Unauthorized user' };
+  const erroUserAuth = { status: 401, message: 'Unauthorized user' };
   
   if (blogPost === null) throw erroPostExist;
-  // if (blogPost.user.id !== idToken) throw erroUserAuth;
+  if (blogPost.user.id !== idToken) throw erroUserAuth;
 
   await BlogPost.destroy({ where: { id } });
 };

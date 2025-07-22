@@ -18,6 +18,8 @@ const extractToken = (value) => {
 const authToken = async (req, res, next) => {
   try {
     const value = req.headers.authorization;
+    if (!value) return res.status(401).json({ message: 'Token not found' });
+    
     const token = extractToken(value);
   
     if (!token) return res.status(401).json({ message: 'Token not found' });
@@ -29,7 +31,7 @@ const authToken = async (req, res, next) => {
     next();
   } catch (e) {
     console.log('Auth token:', e.message);
-    if (validToken(e)) next(erro); 
+    next(erro); 
   }
 };
 
